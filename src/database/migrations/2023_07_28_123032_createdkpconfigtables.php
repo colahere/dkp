@@ -15,10 +15,10 @@ class createdkpconfigtables extends Migration
     {
         Schema::create('dkp_config', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('name')->default(0);
-	    $table->string('level')->default(0);
-	    $table->string('score')->default(0);
-	    $table->string('station')->default(0);
+        $table->string('name')->default(NULL);
+	    $table->string('level')->default(NULL);
+	    $table->string('score');
+	    $table->string('station')->default(NULL);
 	    $table->integer('ship_num')->default(0);
 	    $table->string('label');
 	    $table->timestamps();

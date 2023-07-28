@@ -15,15 +15,15 @@ class createdkpinfotables extends Migration
     {
         Schema::create('dkp_info', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id')->default(0);
-            $table->string('character_id')->default(0);
+            $table->string('user_id');
+            $table->string('character_id');
             $table->string('score')->default(0);
-            $table->integer('status')->default(0);
+            $table->integer('status');
             $table->timestamps();
-            $table->string('remark')->default(0);
+            $table->string('remark')->default(NULL);
             $table->integer('approved')->default(0);
-            $table->string('approver')->default(0);
-            $table->string('supplement_id')->default(0);
+            $table->string('approver')->default(NULL);
+            $table->string('supplement_id')->default(NULL);
             
         });
     }
