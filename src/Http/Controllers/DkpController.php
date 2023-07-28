@@ -108,7 +108,10 @@ class DkpController extends Controller
         $userNicknameList = array();
         foreach ($dkpList as $dkp) {
             $userId = $dkp->id;
-            $QQ = $dkp->QQ;
+            if(!isset($dkp->QQ)){
+                $QQ = 0;
+            }else{
+            $QQ = $dkp->QQ;}
             $score = $dkp->score;
             $status = $dkp->status;
             $name = $dkp->name;

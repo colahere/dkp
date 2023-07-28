@@ -26,10 +26,9 @@
                         <table id="alldkps" class="table table-bordered">
                             <thead>
                             <tr>
-				<th>角色名</th>
-				<th>QQ</th>
+				                <th>角色名</th>
                                 <th>获取DKP</th>
-				<th>花费DKP</th>
+				                <th>花费DKP</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -37,10 +36,8 @@
                                 <tr>
                                     <td>
                                         {{$dkp->name}}
-				    </td>
-					<td>
-						{{$dkp->QQ}}
-					</td>
+                				    </td>
+
                                     <td>
                                         {{$dkp->all_score}}
                                         @if($dkp->all_score>0)

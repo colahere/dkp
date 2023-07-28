@@ -68,9 +68,15 @@ $paptodkp = [];
 	if($mes[$i].split("\t").length ==2){
 		$info=$mes[$i].split("\t");
 		console.log($info);
+		$table = document.getElementById("showpaptodkp");
 		$result = {"character_id" : $info[0],
 			"value" : $info[1],};
 		$paptodkp.push($result);
+		$table.innerHTML += "<tr>\n"+
+                "<td>"+$info[0]+"</td>\n"+
+                "<td>"+$info[1]+"</td>\n"+
+                "</tr>";
+
 	}	
 	}
 	console.log($paptodkp);
