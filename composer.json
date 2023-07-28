@@ -1,5 +1,5 @@
 {
-    "name": "dkp/csqy-dkp",
+    "name": "icolacola/csqy-dkp",
     "description": "A module for SeAT that tracks DKP requests",
     "type": "seat-plugin",
     "license": "GPL-2.0",
