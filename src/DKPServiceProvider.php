@@ -113,7 +113,7 @@ class DKPServiceProvider extends AbstractSeatPlugin
      */
     public function getPackageRepositoryUrl(): string
     {
-        return 'https://github.com/GhostTraction/sg-dkp.git';
+        return 'https://github.com/colahere/dkp.git';
     }
 
     /**

@@ -117,5 +117,10 @@ Route::group([
             'uses' => 'DkpController@paps',
             'middleware' => 'can:dkp.admin',
         ]);
+	    Route::post('/paptodkp', [
+            'as' => 'dkp.paptodkp',
+            'uses' => 'DkpController@paptodkp',
+            'middleware' => 'can:dkp.admin',
+        ]);
     });
 });

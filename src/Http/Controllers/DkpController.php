@@ -9,8 +9,11 @@ use Seat\Web\Http\Controllers\Controller;
 use Dkp\Seat\SeatDKP\Validation\AddSetting;
 use Dkp\Seat\SeatDKP\Validation\AddSupplement;
 use Dkp\Seat\SeatDKP\Validation\Commodity;
+use Dkp\Seat\SeatDKP\Validation\addpap;
 use Seat\Web\Models\User;
+use Illuminate\Http\Request;
 use Seat\Eveapi\Models\RefreshToken;
+
 
 function sendPostRequest($interface,$getParameter,$data) {
     $url = 'http://127.0.0.1:3005/' . $interface . "?" . $getParameter; // 替换为实际的目标地址
@@ -507,35 +510,6 @@ class DkpController extends Controller
             ->with('success', '兑换成功!');
     }
 
-    
-    public function paps()
-    {
-        return view('dkp::paptodkp');
-    }
-
-    public function paptodkp($paptodkp)
-    {   
-        $i= 0;
-        foreach($paptodkp as $paptodkp)
-        {
-        $Users = RefreshToken::find($paptodkp->character_id);
-        $dkpInfo = DkpInfo::create([
-            'user_id' => $users->user_id,
-            'character_id' => $paptodkp->character_id,
-            'score' => $paptodkp->value,
-            'status' => 1,
-            'remark' => "联盟pap",
-            'supplement_id' => '0',
-        ]); 
-        $dkpInfo->save();
-        $i++;
-        }
-
-        return redirect()->back()
-        ->with('success', "成功导入$i条!");
-
-    }
-
     /**
      * 申请兑换撤回
      * @return void
@@ -627,5 +601,36 @@ class DkpController extends Controller
         $dkpInfo->save();
 
         return json_encode(['name' => $action, 'value' => $kill_id, 'approver' => auth()->user()->name]);
+    }
+
+    public function paps()
+    {
+        return view('dkp::paptodkp');
+    }
+
+    public function paptodkp(addpap $request)
+    {
+	    $mes = $request->input('trdkp');
+	$paptodkp = json_decode($mes);    
+        $i= 0;
+        foreach($paptodkp as $paptodkp)
+        {
+		$Users = RefreshToken::find($paptodkp->character_id);
+	
+        $dkpInfo = DkpInfo::create([
+            'user_id' => $Users->user_id,
+            'character_id' => $paptodkp->character_id,
+            'score' => $paptodkp->value,
+            'status' => 1,
+            'remark' => "联盟pap",
+            'supplement_id' => '0',
+        ]);
+        $dkpInfo->save();
+        $i++;
+        }
+
+        return redirect()->back()
+        ->with('success', "成功导入".$i."条!");
+
     }
 }
