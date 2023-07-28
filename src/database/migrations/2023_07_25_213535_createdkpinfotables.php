@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class createdkpinfotables extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('dkp_info', function (Blueprint $table) {
+            $table->integer('id');
+            $table->string('user_id');
+            $table->string('character_id');
+            $table->string('score');
+            $table->integer('status');
+            $table->timestamps();
+            $table->string('remark')->default(0);
+            $table->integer('approved')->default(0);
+            $table->string('approver')->default(0);
+            $table->string('supplement_id')->default(0);
+            
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('dkp_info');
+    }
+}

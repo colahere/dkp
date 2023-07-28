@@ -1,0 +1,30 @@
+{
+    "name": "dkp/sg-dkp",
+    "description": "A module for SeAT that tracks DKP requests",
+    "type": "seat-plugin",
+    "license": "GPL-2.0",
+    "authors": [{
+        "name": "COLA",
+        "email": "531976014@qq.com"
+    }],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Dkp\\Seat\\SeatDKP\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dkp\\Seat\\SeatDKP\\DKPServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "eveseat/services": "^4.1",
+        "eveseat/eveapi": "^4.0",
+        "eveseat/web": "^4.0",
+        "eveseat/eseye": "^2.0"
+    }
+}
