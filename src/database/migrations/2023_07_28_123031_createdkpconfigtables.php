@@ -17,7 +17,7 @@ class createdkpconfigtables extends Migration
         $table->increments('id');
         $table->string('name')->default(0);
 	    $table->string('level')->default(0);
-	    $table->string('score');
+	    $table->string('score')->default(0);
 	    $table->string('station')->default(0);
 	    $table->integer('ship_num')->default(0);
 	    $table->string('label');
