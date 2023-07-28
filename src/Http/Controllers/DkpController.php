@@ -98,7 +98,6 @@ class DkpController extends Controller
     public function getCommodityInfo()
     {
         $dkpList = DkpInfo::join('users', 'users.id', '=', 'dkp_info.user_id')
-            ->leftjoin('dkp_QQ', 'dkp_QQ.id', '=', 'dkp_info.user_id')
             ->get();
         #所有角色的总分
         $allDkpList = array();
@@ -108,10 +107,6 @@ class DkpController extends Controller
         $userNicknameList = array();
         foreach ($dkpList as $dkp) {
             $userId = $dkp->id;
-            if(!isset($dkp->QQ)){
-                $QQ = 0;
-            }else{
-            $QQ = $dkp->QQ;}
             $score = $dkp->score;
             $status = $dkp->status;
             $name = $dkp->name;
@@ -144,7 +139,6 @@ class DkpController extends Controller
             $tempDkp = array();
             $tempDkp['user_id'] = $alldkp;
             $tempDkp['name'] = $userNicknameList[$alldkp];
-            $tempDkp['QQ'] = $QQ;
             $tempDkp['all_score'] = $allscore;
             if (array_key_exists($alldkp, $useDkpList)) {
                 $tempDkp['use_score'] = $useDkpList[$alldkp];

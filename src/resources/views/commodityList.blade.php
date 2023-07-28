@@ -37,7 +37,6 @@
                                     <td>
                                         {{$dkp->name}}
                 				    </td>
-
                                     <td>
                                         {{$dkp->all_score}}
                                         @if($dkp->all_score>0)
