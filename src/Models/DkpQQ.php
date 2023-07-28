@@ -18,6 +18,6 @@ class DkpConfig extends Model
 
     protected $table = 'dkp_QQ';
 
-    protected $fillable = ['id','QQ',];
+    protected $fillable = ['id','user_id','QQ',];
 
 }

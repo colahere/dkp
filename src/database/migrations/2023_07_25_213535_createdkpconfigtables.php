@@ -14,7 +14,7 @@ class createdkpconfigtables extends Migration
     public function up()
     {
         Schema::create('dkp_config', function (Blueprint $table) {
-        $table->integer('id');
+        $table->increments('id');
         $table->string('name')->default(0);
 	    $table->string('level')->default(0);
 	    $table->string('score');

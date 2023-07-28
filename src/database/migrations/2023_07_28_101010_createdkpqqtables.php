@@ -15,7 +15,8 @@ class createdkpqqtables extends Migration
     {
 
     Schema::create('dkp_QQ', function (Blueprint $table) {
-        $table->integer('id');
+        $table->increments('id');
+        $table->string('user_id');
         $table->string('QQ')->default(0);
         $table->timestamps();
     });
