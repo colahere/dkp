@@ -20,10 +20,10 @@ class createdkpinfotables extends Migration
             $table->string('score')->default(0);
             $table->integer('status');
             $table->timestamps();
-            $table->string('remark')->default(NULL);
+            $table->string('remark')->default(0);
             $table->integer('approved')->default(0);
-            $table->string('approver')->default(NULL);
-            $table->string('supplement_id')->default(NULL);
+            $table->string('approver')->default(0);
+            $table->string('supplement_id')->default(0);
             
         });
     }
