@@ -48,6 +48,12 @@ return [
                 'route' => 'dkp.settings',
                 'permission' => 'dkp.admin',
             ],
+            [
+                'name' => '联盟pap导入',
+                'icon' => 'fas fa-cogs',
+                'route' => 'dkp.paps',
+                'permission' => 'dkp.admin',
+            ],
         ],
     ],
 ];

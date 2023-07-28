@@ -10,6 +10,7 @@ use Dkp\Seat\SeatDKP\Validation\AddSetting;
 use Dkp\Seat\SeatDKP\Validation\AddSupplement;
 use Dkp\Seat\SeatDKP\Validation\Commodity;
 use Seat\Web\Models\User;
+use Seat\Eveapi\Models\RefreshToken;
 
 function sendPostRequest($interface,$getParameter,$data) {
     $url = 'http://127.0.0.1:3005/' . $interface . "?" . $getParameter; // 替换为实际的目标地址
@@ -504,6 +505,35 @@ class DkpController extends Controller
 
         return redirect()->back()
             ->with('success', '兑换成功!');
+    }
+
+    
+    public function paps()
+    {
+        return view('dkp::paptodkp');
+    }
+
+    public function paptodkp($paptodkp)
+    {   
+        $i= 0;
+        foreach($paptodkp as $paptodkp)
+        {
+        $Users = RefreshToken::find($paptodkp->character_id);
+        $dkpInfo = DkpInfo::create([
+            'user_id' => $users->user_id,
+            'character_id' => $paptodkp->character_id,
+            'score' => $paptodkp->value,
+            'status' => 1,
+            'remark' => "联盟pap",
+            'supplement_id' => '0',
+        ]); 
+        $dkpInfo->save();
+        $i++;
+        }
+
+        return redirect()->back()
+        ->with('success', "成功导入$i条!");
+
     }
 
     /**

@@ -111,5 +111,11 @@ Route::group([
             'uses' => 'DkpController@useScoreDetail',
             'middleware' => 'can:dkp.admin',
         ]);
+
+        Route::get('/paps', [
+            'as' => 'dkp.paps',
+            'uses' => 'DkpController@paps',
+            'middleware' => 'can:dkp.admin',
+        ]);
     });
 });
