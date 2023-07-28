@@ -14,7 +14,7 @@ class createdkpsupplementtables extends Migration
     public function up()
     {
         Schema::create('dkp_supplement', function (Blueprint $table) {
-            $table->integer('id');
+            $table->increments('id');
             $table->string('supplement_name')->default(0);
             $table->string('all_dkp')->default(0);
             $table->string('use_dkp');

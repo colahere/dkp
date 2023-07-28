@@ -14,7 +14,7 @@ class createdkpinfotables extends Migration
     public function up()
     {
         Schema::create('dkp_info', function (Blueprint $table) {
-            $table->integer('id');
+            $table->increments('id');
             $table->string('user_id');
             $table->string('character_id');
             $table->string('score');
