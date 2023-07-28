@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class createdkpinfotables extends Migration
+class createdkpsupplementtables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class createdkpinfotables extends Migration
      */
     public function up()
     {
-        Schema::create('dkp_info', function (Blueprint $table) {
+        Schema::create('dkp_supplement', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
-            $table->string('character_id');
-            $table->string('score');
-            $table->integer('status');
+            $table->string('supplement_name')->default(0);
+            $table->string('all_dkp')->default(0);
+            $table->string('use_dkp')->default(0);
+            $table->string('supplement_num')->default(0);
+            $table->integer('is_use')->default(0);
             $table->timestamps();
             $table->string('remark')->default(0);
-            $table->integer('approved')->default(0);
-            $table->string('approver')->default(0);
-            $table->string('supplement_id')->default(0);
-            
         });
     }
 
@@ -35,6 +32,7 @@ class createdkpinfotables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dkp_info');
+        Schema::dropIfExists('dkp_supplement');
     }
 }
+
