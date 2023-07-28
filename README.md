@@ -1,12 +1,19 @@
-# sg-dkp
+# dkp
 测试dkp
 
-php artisan down
+sudo -H -u www-data bash -c 'php artisan down'
 
-composer require dkp/sg-dkp
+sudo -H -u www-data bash -c 'composer require dkp/csqy-dkp'
 
-php artisan vendor:publish --force
+sudo -H -u www-data bash -c 'php artisan vendor:publish --force --all'
 
-php artisan migrate
+sudo -H -u www-data bash -c 'php artisan migrate'
 
-php artisan up
+sudo -H -u www-data bash -c 'php artisan route:cache'
+
+sudo -H -u www-data bash -c 'php artisan config:cache'
+
+sudo -H -u www-data bash -c 'php artisan seat:cache:clear'
+
+sudo -H -u www-data bash -c 'php artisan up'
+
