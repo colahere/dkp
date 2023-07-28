@@ -23,13 +23,6 @@ class createdkpconfigtables extends Migration
 	    $table->string('label');
 	    $table->timestamps();
     });
-
-    Schema::create('dkp_QQ', function (Blueprint $table) {
-        $table->integer('id');
-        $table->string('QQ')->default(0);
-    });
-
-
     }
 
     /**
