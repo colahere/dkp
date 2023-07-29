@@ -3,7 +3,7 @@
 
 sudo -H -u www-data bash -c 'php artisan down'
 
-sudo -H -u www-data bash -c 'composer require icolacola/csqy-dkp'
+sudo -H -u www-data bash -c 'composer require icocacola/csqy-dkp'
 
 sudo -H -u www-data bash -c 'php artisan vendor:publish --force --all'
 
