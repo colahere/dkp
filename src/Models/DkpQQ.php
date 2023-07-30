@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Seat\Services\Traits\NotableTrait;
 
 
-class DkpConfig extends Model
+class DkpQQ extends Model
 {
     use NotableTrait;
     use Notifiable;

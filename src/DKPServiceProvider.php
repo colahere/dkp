@@ -125,7 +125,7 @@ class DKPServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistPackageName(): string
     {
-        return 'sg-dkp';
+        return 'csqy-dkp';
     }
 
     /**
@@ -137,6 +137,6 @@ class DKPServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistVendorName(): string
     {
-        return 'dkp';
+        return 'icocacola';
     }
 }
