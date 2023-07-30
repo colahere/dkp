@@ -12,6 +12,7 @@ return [
         'route_segment' => 'dkp',
         'permission' => 'dkp.request',
         'entries' => [
+
             [
                 'name' => '我的DKP',
                 'icon' => 'fas fa-medkit',
@@ -23,6 +24,12 @@ return [
                 'icon' => 'fas fa-gavel',
                 'route' => 'dkp.commodity',
                 'permission' => 'srp.request',
+            ],
+            [
+                'name' => 'QQ绑定',
+                'icon' => 'fas fa-cogs',
+                'route' => 'dkp.addqq',
+                'permission' => 'dkp.request',
             ],
             [
                 'name' => '成员DKP统计',

@@ -5,11 +5,13 @@ namespace Dkp\Seat\SeatDKP\Http\Controllers;
 use Dkp\Seat\SeatDKP\Models\DkpInfo;
 use Dkp\Seat\SeatDKP\Models\DkpConfig;
 use Dkp\Seat\SeatDKP\Models\DkpSupplement;
+use Dkp\Seat\SeatDKP\Models\DkpQQ;
 use Seat\Web\Http\Controllers\Controller;
 use Dkp\Seat\SeatDKP\Validation\AddSetting;
 use Dkp\Seat\SeatDKP\Validation\AddSupplement;
 use Dkp\Seat\SeatDKP\Validation\Commodity;
 use Dkp\Seat\SeatDKP\Validation\addpap;
+use Dkp\Seat\SeatDKP\Validation\addqq;
 use Seat\Web\Models\User;
 use Illuminate\Http\Request;
 use Seat\Eveapi\Models\RefreshToken;
@@ -630,4 +632,28 @@ class DkpController extends Controller
         ->with('success', "成功导入".$i."条!");
 
     }
+
+    public function addqq()
+    {
+        return view('dkp::addqq');
+    }
+
+    public function addqqinfo(addqq $request)
+    {
+        $mes = $request->input('addqq');
+        $dkpqq = DkpQQ::create([
+            'user_id' => auth()->user()->id ,
+            'QQ' => $mes , 
+        ]);
+        $dkpqq->save();
+        return redirect()->back()
+        ->with('success', "成功导入QQ:".$mes);
+
+
+    }
+
+
+
+
+
 }

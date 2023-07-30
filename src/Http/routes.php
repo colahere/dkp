@@ -122,5 +122,16 @@ Route::group([
             'uses' => 'DkpController@paptodkp',
             'middleware' => 'can:dkp.admin',
         ]);
+        Route::get('/addqq', [
+            'as' => 'dkp.addqq',
+            'uses' => 'DkpController@addqq',
+            'middleware' => 'can:dkp.request',
+        ]);
+        Route::post('/addqqinfo', [
+            'as' => 'dkp.addqqinfo',
+            'uses' => 'DkpController@addqqinfo',
+            'middleware' => 'can:dkp.request',
+        ]);
+
     });
 });
