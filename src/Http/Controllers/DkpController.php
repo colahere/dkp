@@ -608,18 +608,22 @@ class DkpController extends Controller
     }
 
     public function paptodkp(addpap $request)
-    {
+    {   
+        $setlist = DkpConfig::where("dkp_config.label","=","pap")->get();
+        $papset = (float)$setlist[0]->score;
 	    $mes = $request->input('trdkp');
-	$paptodkp = json_decode($mes);    
+	    $paptodkp = json_decode($mes);    
         $i= 0;
         foreach($paptodkp as $paptodkp)
         {
-		$Users = RefreshToken::find($paptodkp->character_id);
-	
+            $value = (float)$paptodkp->value;
+            $Users = RefreshToken::find($paptodkp->character_id);
+            $score = (string)$value*$papset;
+
         $dkpInfo = DkpInfo::create([
             'user_id' => $Users->user_id,
             'character_id' => $paptodkp->character_id,
-            'score' => $paptodkp->value,
+            'score' => $score,
             'status' => 1,
             'remark' => "联盟pap",
             'supplement_id' => '0',
