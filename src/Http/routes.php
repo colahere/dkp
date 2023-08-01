@@ -3,6 +3,17 @@
 
 Route::group([
     'namespace' => 'Dkp\Seat\SeatDKP\Http\Controllers',
+    'middleware' => ['api.request','api.auth'],
+    'prefix' => 'api/v2/dkp/metrics',
+], function () {
+    Route::get('/qqdkp/{QQ}', [
+        'as' => 'dkp.qqdkp',
+        'uses' => 'DkpController@getqqdkp',
+    ]);
+
+});
+Route::group([
+    'namespace' => 'Dkp\Seat\SeatDKP\Http\Controllers',
     'prefix' => 'dkp',
 ], function () {
 
