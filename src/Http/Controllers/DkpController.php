@@ -18,7 +18,7 @@ use Seat\Eveapi\Models\RefreshToken;
 
 
 function sendPostRequest($interface,$getParameter,$data) {
-    $url = 'http://127.0.0.1:3005/' . $interface . "?" . $getParameter; // 替换为实际的目标地址
+    $url = 'https://seat.chuangshiqingyu.top:443/' . $interface . "?" . $getParameter; // 替换为实际的目标地址
 
     // 将数据转换为 JSON
     $jsonData = json_encode($data);
@@ -648,12 +648,41 @@ class DkpController extends Controller
         $dkpqq->save();
         return redirect()->back()
         ->with('success', "成功导入QQ:".$mes);
-
-
     }
 
+    public function getqqdkp($QQ = null)
+    {   
 
+        $dkpList = DkpInfo::join('character_infos', 'character_infos.character_id', '=', 'dkp_info.character_id')
+        ->join('dkp_QQ','dkp_QQ.user_id', '=','dkp_info.user_id')
+        ->where('dkp_QQ.QQ', '=', $QQ)
+        ->select('dkp_info.*', 'character_infos.name')
+        ->get();
 
+    $sumDkp = 0;
+    $lockDkp = 0;
+    $isUseDkp = 0;
 
-
+    foreach ($dkpList as $dkp) {
+        $status = $dkp->status;
+        $score = $dkp->score;
+        //累计获取的dkp总量
+        if ($status == 1) {
+            $sumDkp += $score;
+        }
+        //兑换锁定的dkp
+        if ($status == 2) {
+            $lockDkp += $score;
+        }
+        //已使用的dkp
+        if ($status == 3) {
+            $isUseDkp += $score;
+        }
+    }
+        return [
+            'sumDkp' => $sumDkp,
+            'lockDkp' => $lockDkp,
+            'isUseDkp' => $isUseDkp,
+        ];
+    }
 }
