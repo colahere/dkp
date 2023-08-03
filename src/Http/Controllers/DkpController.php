@@ -1,7 +1,8 @@
 <?php
 
 namespace Dkp\Seat\SeatDKP\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use Seat\Kassie\Calendar\Models\Pap;
 use Dkp\Seat\SeatDKP\Models\DkpInfo;
 use Dkp\Seat\SeatDKP\Models\DkpConfig;
 use Dkp\Seat\SeatDKP\Models\DkpSupplement;
@@ -603,8 +604,42 @@ class DkpController extends Controller
     }
 
     public function paps()
+    {   
+        $today = carbon();
+        $leginpap = Pap::where('month', $today->month)
+                          ->where('year', $today->year)
+                          ->select('character_id', DB::raw('sum(value) as qty'))
+                          ->groupBy('character_id')
+                          ->get();
+        return view('dkp::paptodkp')->with('leginpap',$leginpap);
+    }
+
+    public function leginpap()
     {
-        return view('dkp::paptodkp');
+        $today = carbon();
+        $leginpap = Pap::where('month', $today->month)
+                          ->where('year', $today->year)
+                          ->select('character_id', DB::raw('sum(value) as score'))
+                          ->groupBy('character_id')
+                          ->get();
+        $i= 0;
+        foreach($leginpap as $leginpap)
+        {
+            $Users = RefreshToken::find($leginpap->character_id);
+            $dkpInfo = DkpInfo::create([
+                'user_id' => $Users->user_id,
+                'character_id' => $leginpap->character_id,
+                'score' => $leginpap->score,
+                'status' => 1,
+                'remark' => "军团pap",
+                'supplement_id' => '0',
+            ]);
+            $dkpInfo->save();
+            $i++;
+        }
+        return redirect()->back()
+        ->with('success', "成功导入".$i."条!");
+
     }
 
     public function paptodkp(addpap $request)

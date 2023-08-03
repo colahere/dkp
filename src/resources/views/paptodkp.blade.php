@@ -1,44 +1,98 @@
-@extends('web::layouts.grids.12')
+@extends('web::layouts.grids.8-4')
 
 @section('title', 'DKP')
-@section('page_header', '联盟Pap导入')
+@section('page_header', 'Pap导入——————每月1号执行一次')
 
 @push('head')
     <link rel="stylesheet"
           type="text/css"
           href="https://snoopy.crypta.tech/snoopy/seat-srp-approval.css"/>
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('web/css/denngarr-srp-hook.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="https://snoopy.crypta.tech/snoopy/seat-srp-request.css"/>
 @endpush
 
-@section('full')
-<form role="form" action="{{ route('dkp.paptodkp') }}" method="post">
-    @csrf
-    <div class="form-group">
-    <textarea type="form-control" class="form-control" name="papform" id="papform" cols="70" rows="30" placeholder="请复制整个excel并在此处粘贴"></textarea>
-    <br>
-    <input type="hidden"  id="trdkp" name="trdkp">
-    <input type="button" id="readform" name="readform" value="解析" />
-    <input type="submit" id="submitdkp" name="submitdkp" value="提交" />
-		
-    </div>
-</form>
+@section('left')
+<div class = "card card-success">
+        <div class = "card-header">
+			<h3 class="card-title">联盟PAP导入</h3>
+        </div>
+        <div class="card-body">
+       	  	<form role="form" action="{{ route('dkp.paptodkp') }}" method="post">
+   		 	@csrf
+        	<div class="form-group">
+        		<textarea type="form-control" class="form-control" name="papform" id="papform" cols="70" rows="10" placeholder="请复制整个excel并在此处粘贴"></textarea>
+        		<br>
+        			<input type="hidden"  id="trdkp" name="trdkp">
+        			<input type="button" id="readform" name="readform" value="解析" />
+        			<input type="submit" id="submitdkp" name="submitdkp" value="提交" />
+				</br>
+        	</div>
+       	 	</form>
+		</div>
+</div>
+	<div class = "card card-default">
+		<div class = "card-header">
+			<h3 class="card-title">军团PAP导入</h3>
+		</div>
+        <div class="card-body">
+			<form role="form" action="{{ route('dkp.leginpap') }}" method="post">
+				@csrf
+        		<div class="form-group">
+					<input type="submit" id="leginpap" name="leginpap" value="军团pap导入" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+@stop
+@section('right')
+<div class = "card card-primary">
+	<div class = "card-header">
+		<h3 class="card-title">联盟PAP导入预览</h3>
+	</div>
+	<div class="card-body">
+    	<table id="showpaptodkp" class="table table-condensed">
+        	<thead>
+       		<tr>
+                <th><label class="label pull-right" style="font-size: 100%">角色ID</label></th>
+                <th><label class="label pull-right" style="font-size: 100%">paps数量</label></th>
+        	</tr>
+        	</thead>
+        	<tbody>
+        	</tbody>
+    	</table>
+
+	</div>
+</div>
+<div class = "card card-default">
+	<div class = "card-header">
+			<h3 class="card-title">军团PAP预览</h3>
+		</div>
+		<div class="card-body">
+		<table id="showleginpap" class="table table-condensed">
+		<thead>
+       		<tr>
+                <th><label class="label pull-right" style="font-size: 100%">角色ID</label></th>
+                <th><label class="label pull-right" style="font-size: 100%">paps数量</label></th>
+        	</tr>
+        </thead>
+        <tbody>
+		@foreach(json_decode($leginpap,false) as $leginpap)
+			<tr>
+				<td>{{$leginpap->character_id}}</td>
+				<td>{{$leginpap->qty}}</td>
+			</tr>
+		@endforeach
+
+        </tbody>
+		</table>
+		</div>
+	</div>
+</div>
 
 
-<table id="showpaptodkp" class="table table-bordered">
-	<thead>
-	<tr>
-		<th>角色ID</th>
-		<th>paps数量</th>
-	</tr>
-	</thead>
-	<tbody>
-	</tbody>
-	</table>
+@stop
 
-
-
-    @stop
 
 @push('javascript')
 <script>
@@ -86,8 +140,5 @@ $paptodkp = [];
 	console.log($mesi);
 
     });
-
-
-
 </script>
 @endpush
