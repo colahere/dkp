@@ -143,6 +143,13 @@ Route::group([
             'uses' => 'DkpController@addqqinfo',
             'middleware' => 'can:dkp.request',
         ]);
+        Route::post('/leginpap', [
+            'as' => 'dkp.leginpap',
+            'uses' => 'DkpController@leginpap',
+            'middleware' => 'can:dkp.request',
+        ]);
+
+
 
     });
 });
