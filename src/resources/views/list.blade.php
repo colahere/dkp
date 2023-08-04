@@ -14,7 +14,7 @@
 @section('full')
     <div class="card card-primary card-solid">
         <div class="card-body">
-            <div class="progress" style="width: 30%;">
+            <div class="progress" style="width: 70%;">
                 @if(($sumDkp == 0))
                     <div class="progress-bar bg-success" role="progressbar"
                          style="width: 100%"

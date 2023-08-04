@@ -14,7 +14,7 @@
 @section('full')
     <div class="card card-primary card-solid">
         <div class="card-body">
-            <div class="progress" style="width: 30%;">
+            <div class="progress" style="width: 70%;">
                 @if(($sumDkp == 0))
                     <div class="progress-bar bg-success" role="progressbar"
                          style="width: 100%"
@@ -61,7 +61,7 @@
                                     <tr>
                                         @endif
                                         <th>
-                                            <div class="card" style="width: 18rem; background-color: #d7f4fe;">
+                                            <div class="card" style="width: 18rem; background-color: #FFFFFF;">
 
                                                 <div class="card-body">
                                                     <h5 class="card-title"
@@ -81,6 +81,13 @@
                                                             {{$dkpSupp->use_dkp}}
                                                         @endif
                                                         <br>
+                                                        个人兑换上限:
+                                                        @if($dkpSupp->remark-$dkpSupp->already<1)
+                                                            <span style="color: red">{{$dkpSupp->remark-$dkpSupp->already}}</span>
+                                                        @else
+                                                            {{$dkpSupp->remark-$dkpSupp->already}}
+                                                        @endif
+                                                        <br>
                                                         库存:
                                                         @if($dkpSupp->supplement_num<1)
                                                             <span style="color: red">{{$dkpSupp->supplement_num}}</span>
@@ -89,7 +96,7 @@
                                                         @endif
 
                                                     </p>
-                                                    @if(($sumDkp-$lockDkp-$isUseDkp)<$dkpSupp->use_dkp || $sumDkp<$dkpSupp->all_dkp ||$dkpSupp->supplement_num<1)
+                                                    @if(($sumDkp-$lockDkp-$isUseDkp)<$dkpSupp->use_dkp || $sumDkp<$dkpSupp->all_dkp ||$dkpSupp->supplement_num<1 ||$dkpSupp->remark-$dkpSupp->already<1)
                                                         <a href="#" class="btn btn-default disabled">不可兑换</a>
                                                     @else
                                                         <a href='{{ route('dkp.exchangeCommodity', ['supplementId' => $dkpSupp->id,'userId'=> auth()->user()->id])}}'

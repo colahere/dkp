@@ -37,6 +37,7 @@
                                 <th>物品名称</th>
                                 <th>兑换条件(总DKP要求)</th>
                                 <th>花费DKP</th>
+                                <th>个人兑换限制</th>
                                 <th>库存</th>
                                 <th>上架时间</th>
                                 <th>操作</th>
@@ -55,6 +56,9 @@
                                         {{$dkp->use_dkp}}
                                     </td>
                                     <td>
+                                        {{$dkp->remark}}
+                                    </td>
+                                    <td>
                                         {{$dkp->supplement_num}}
                                     </td>
                                     <td>
@@ -63,7 +67,7 @@
                                     <td>
                                         <button type="button" data-toggle="modal" data-op-id="{{ $dkp->id }}"
                                                 data-all-dkp="{{ $dkp->all_dkp }}" data-use-dkp="{{ $dkp->use_dkp }}"
-                                                data-supplement-num="{{ $dkp->supplement_num }}"
+                                                data-supplement-num="{{ $dkp->supplement_num }}" data-remark="{{ $dkp->remark }}"
                                                 data-target="#supplement-edit"
                                                 class="btn btn-xs btn-link">
                                             <i class="fas fa-pencil-alt snoopy" data-toggle="tooltip"
@@ -117,11 +121,13 @@
                 var all_dkp = $(e.relatedTarget).data('all-dkp');
                 var use_dkp = $(e.relatedTarget).data('use-dkp');
                 var supplement_num = $(e.relatedTarget).data('supplement-num');
+                var remark = $(e.relatedTarget).data('remark');
 
                 $(e.currentTarget).find('input[name="id"]').val(id);
                 $(e.currentTarget).find('input[name="all_dkp"]').val(all_dkp);
                 $(e.currentTarget).find('input[name="use_dkp"]').val(use_dkp);
                 $(e.currentTarget).find('input[name="supplement_num"]').val(supplement_num);
+                $(e.currentTarget).find('input[name="remark"]').val(remark);
             });
         });
 
