@@ -18,6 +18,7 @@ class AddSupplement extends FormRequest
             'supplement_num' => 'required|regex:[^[0-9]+\.?[0-9]*$]',
             'use_dkp' => 'required|regex:[^[0-9]+\.?[0-9]*$]',
             'all_dkp' => 'required|regex:[^[0-9]+\.?[0-9]*$]',
+            'remark' => 'required|regex:[^[0-9]+\.?[0-9]*$]',
         ];
     }
 

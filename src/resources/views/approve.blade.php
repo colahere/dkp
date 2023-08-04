@@ -1,7 +1,7 @@
 @extends('web::layouts.grids.12')
 
 @section('title', 'DKP')
-@section('page_header', '我的DKP')
+@section('page_header', '兑换审批')
 
 @push('head')
     <link rel="stylesheet"

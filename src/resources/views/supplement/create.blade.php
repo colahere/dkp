@@ -43,6 +43,15 @@
                         </div>
                     </div>
 
+                    {{-- 个人兑换限制 --}}
+                    <div id=remark" class="form-group row">
+                        <label for="title" class="col-sm-3 col-form-label">个人兑换限制:
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="remark"
+                                   placeholder="个人兑换限制">
+                        </div>
+                    </div>
                     {{-- 库存 --}}
                     <div id="supplement_num" class="form-group row">
                         <label for="title" class="col-sm-3 col-form-label">库存:

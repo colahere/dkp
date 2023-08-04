@@ -374,12 +374,14 @@ class DkpController extends Controller
         $all_dkp = $request->input('all_dkp');
         $use_dkp = $request->input('use_dkp');
         $supplement_num = $request->input('supplement_num');
+        $remark = $request->input('remark');
         DkpSupplement::create([
             'supplement_name' => $supplement_name,
             'all_dkp' => $all_dkp,
             'use_dkp' => $use_dkp,
             'supplement_num' => $supplement_num,
             'is_use' => 1,
+            'remark' =>$remark,
         ])->save();
         return redirect()->back()
             ->with('success', '添加成功');
@@ -414,12 +416,13 @@ class DkpController extends Controller
         $all_dkp = $request->input('all_dkp');
         $use_dkp = $request->input('use_dkp');
         $supplement_num = $request->input('supplement_num');
-
+        $remark = $request->input('remark');
         $dkpSupplement = DkpSupplement::find($id);
 
         $dkpSupplement->all_dkp = $all_dkp;
         $dkpSupplement->use_dkp = $use_dkp;
         $dkpSupplement->supplement_num = $supplement_num;
+        $dkpSupplement->remark = $remark;
         $flag = $dkpSupplement->save();
         if ($flag) {
             return redirect()->back()
@@ -459,8 +462,24 @@ class DkpController extends Controller
             }
         }
 
-        $DkpSupplement = DkpSupplement::where('is_use', '=', '1')
-            ->get();
+        $DkpSupplement = DkpSupplement::leftJoin('dkp_info', 'dkp_info.supplement_id', '=', 'dkp_supplement.id')
+                ->select('dkp_supplement.id',
+                                'dkp_supplement.supplement_name',
+                                'dkp_supplement.all_dkp',
+                                'dkp_supplement.use_dkp',
+                                'dkp_supplement.is_use',
+                                'dkp_supplement.supplement_num',
+                                'dkp_supplement.remark'
+                , DB::raw('COUNT(dkp_info.supplement_id) as already'))
+                            ->where('dkp_supplement.is_use', 1)
+                            ->groupBy('dkp_supplement.id',
+                                'dkp_supplement.supplement_name',
+                                'dkp_supplement.all_dkp',
+                                'dkp_supplement.use_dkp',
+                                'dkp_supplement.is_use',
+                                'dkp_supplement.supplement_num',
+                                'dkp_supplement.remark')
+                            ->get();
 
         $dkpList = DkpInfo::join('character_infos', 'character_infos.character_id', '=', 'dkp_info.character_id')
             ->where('dkp_info.user_id', '=', auth()->user()->id)
