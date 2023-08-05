@@ -16,6 +16,7 @@
                     <input type="hidden" name="supplement_num" value="1">
                     <input type="hidden" name="use_dkp" value="1">
                     <input type="hidden" name="all_dkp" value="1">
+                    <input type="hidden" name="remark" value="1">
                 </form>
 
                 <div class="d-flex justify-content-between">
