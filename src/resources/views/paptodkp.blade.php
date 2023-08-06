@@ -14,6 +14,35 @@
 @section('left')
 <div class = "card card-success">
         <div class = "card-header">
+			<h3 class="card-title">工具人dkp发放</h3>
+		</div>
+		<div class="card-body">
+		<form role="form" action="{{ route('dkp.tooldkps') }}" method="post">
+   		 	@csrf
+        	<div class="form-group">
+			<br>
+                                名称：<select name="user_id" id="user_id" style="width: 50%">
+                                <option value=""></option>
+                                @foreach(json_decode($user,false) as $user)
+                                <option value="{{$user->id}}">用户名称:{{$user->name}}</option>
+                                @endforeach
+                                </select>
+                                        <br>
+                                数量：<input type="text" id="score" name="score" style="width: 50%"/>
+                                        <br>
+                                原因：<input type="text" id="remark" name="remark" style="width: 50%"/>
+                                        <br>
+                                <input type="submit" id="submittooldkp" name="submittooldkp" value="提交" />
+            </br>
+
+        	</div>
+       	</form>
+		</div>
+</div>
+
+
+<div class = "card card-success">
+        <div class = "card-header">
 			<h3 class="card-title">联盟PAP导入</h3>
         </div>
         <div class="card-body">

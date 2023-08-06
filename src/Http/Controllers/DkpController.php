@@ -13,6 +13,7 @@ use Dkp\Seat\SeatDKP\Validation\AddSupplement;
 use Dkp\Seat\SeatDKP\Validation\Commodity;
 use Dkp\Seat\SeatDKP\Validation\addpap;
 use Dkp\Seat\SeatDKP\Validation\addqq;
+use Dkp\Seat\SeatDKP\Validation\addtooldkp;
 use Seat\Web\Models\User;
 use Illuminate\Http\Request;
 use Seat\Eveapi\Models\RefreshToken;
@@ -630,7 +631,29 @@ class DkpController extends Controller
                           ->select('character_id', DB::raw('sum(value) as qty'))
                           ->groupBy('character_id')
                           ->get();
-        return view('dkp::paptodkp')->with('leginpap',$leginpap);
+        $user = User::get();
+        return view('dkp::paptodkp')->with('leginpap',$leginpap)->with('user',$user);
+    }
+
+    public function tooldkps(addtooldkp $request)
+    {   
+        $user_id = $request->input('user_id');
+        $score = $request->input('score');
+        $remark = $request->input('remark');
+        $user = User::find($user_id);
+        $dkpInfo = DkpInfo::create([
+            'user_id' => $user->id,
+            'character_id' => $user->main_character_id,
+            'score' => $score,
+            'status' => 1,
+            'remark' => $remark,
+            'supplement_id' => '0',
+        ]);
+        $dkpInfo->save();
+
+
+        return redirect()->back()
+        ->with('success', "成功添加1条!");
     }
 
     public function leginpap()
