@@ -148,7 +148,11 @@ Route::group([
             'uses' => 'DkpController@leginpap',
             'middleware' => 'can:dkp.request',
         ]);
-
+        Route::post('/tooldkps', [
+            'as' => 'dkp.tooldkps',
+            'uses' => 'DkpController@tooldkps',
+            'middleware' => 'can:dkp.admin',
+        ]);
 
 
     });
