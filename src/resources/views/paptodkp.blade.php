@@ -27,11 +27,14 @@
                                 <option value="{{$user->id}}">用户名称:{{$user->name}}</option>
                                 @endforeach
                                 </select>
+										<br>
                                         <br>
                                 数量：<input type="text" id="score" name="score" style="width: 50%"/>
                                         <br>
+										<br>
                                 原因：<input type="text" id="remark" name="remark" style="width: 50%"/>
                                         <br>
+										<br>
                                 <input type="submit" id="submittooldkp" name="submittooldkp" value="提交" />
             </br>
 
