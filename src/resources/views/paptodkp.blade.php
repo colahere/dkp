@@ -1,7 +1,7 @@
 @extends('web::layouts.grids.8-4')
 
 @section('title', 'DKP')
-@section('page_header', 'Pap导入——————每月1号执行一次')
+@section('page_header', 'DKP发放')
 
 @push('head')
     <link rel="stylesheet"
@@ -21,7 +21,7 @@
    		 	@csrf
         	<div class="form-group">
 			<br>
-                                名称：<select name="user_id" id="user_id" style="width: 50%">
+                                名称：<select name="user_id" id="user_id" class="form-control w-50">
                                 <option value=""></option>
                                 @foreach(json_decode($user,false) as $user)
                                 <option value="{{$user->id}}">用户名称:{{$user->name}}</option>
@@ -29,13 +29,13 @@
                                 </select>
 										<br>
                                         <br>
-                                数量：<input type="text" id="score" name="score" style="width: 50%"/>
+                                数量：<input type="text" id="score" name="score" class="form-control w-50"/>
                                         <br>
 										<br>
-                                原因：<input type="text" id="remark" name="remark" style="width: 50%"/>
+                                原因：<input type="text" id="remark" name="remark" class="form-control w-50"/>
                                         <br>
 										<br>
-                                <input type="submit" id="submittooldkp" name="submittooldkp" value="提交" />
+                                <input type="submit" id="submittooldkp" name="submittooldkp" value="提交" class="btn btn-primary float-right"/>
             </br>
 
         	</div>
@@ -55,8 +55,8 @@
         		<textarea type="form-control" class="form-control" name="papform" id="papform" cols="70" rows="10" placeholder="请复制整个excel并在此处粘贴"></textarea>
         		<br>
         			<input type="hidden"  id="trdkp" name="trdkp">
-        			<input type="button" id="readform" name="readform" value="解析" />
-        			<input type="submit" id="submitdkp" name="submitdkp" value="提交" />
+        			<input type="button" id="readform" name="readform" value="解析" class="btn btn-primary float-right"/>
+        			<input type="submit" id="submitdkp" name="submitdkp" value="提交" class="btn btn-primary float-right"/>
 				</br>
         	</div>
        	 	</form>
@@ -70,7 +70,7 @@
 			<form role="form" action="{{ route('dkp.leginpap') }}" method="post">
 				@csrf
         		<div class="form-group">
-					<input type="submit" id="leginpap" name="leginpap" value="军团pap导入" />
+					<input type="submit" id="leginpap" name="leginpap" value="军团pap导入" class="btn btn-primary float-right"/>
 				</div>
 			</form>
 		</div>

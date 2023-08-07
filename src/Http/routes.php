@@ -153,7 +153,11 @@ Route::group([
             'uses' => 'DkpController@tooldkps',
             'middleware' => 'can:dkp.admin',
         ]);
-
+        Route::post('/editname', [
+            'as' => 'dkp.editname',
+            'uses' => 'DkpController@editname',
+            'middleware' => 'can:dkp.request',
+        ]);
 
     });
 });
