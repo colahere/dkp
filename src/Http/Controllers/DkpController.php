@@ -725,7 +725,7 @@ class DkpController extends Controller
         $mes = $request->input('addqq');
         $esqq = DkpQQ::where("user_id",auth()->user()->id)->first();
         
-        if($esqq->QQ){
+        if($esqq){
         $dkpqq = DkpQQ::where("user_id",auth()->user()->id)->update(['QQ'=>$mes]);
         return redirect()->back()
         ->with('success', "更新QQ成功:".$mes);}
