@@ -13,6 +13,7 @@ use Dkp\Seat\SeatDKP\Validation\AddSupplement;
 use Dkp\Seat\SeatDKP\Validation\Commodity;
 use Dkp\Seat\SeatDKP\Validation\addpap;
 use Dkp\Seat\SeatDKP\Validation\addqq;
+use Dkp\Seat\SeatDKP\Validation\editname;
 use Dkp\Seat\SeatDKP\Validation\addtooldkp;
 use Seat\Web\Models\User;
 use Illuminate\Http\Request;
@@ -722,13 +723,29 @@ class DkpController extends Controller
     public function addqqinfo(addqq $request)
     {
         $mes = $request->input('addqq');
+        $esqq = DkpQQ::where("user_id",auth()->user()->id)->first();
+        
+        if($esqq->QQ){
+        $dkpqq = DkpQQ::where("user_id",auth()->user()->id)->update(['QQ'=>$mes]);
+        return redirect()->back()
+        ->with('success', "更新QQ成功:".$mes);}
+        
+        else{
         $dkpqq = DkpQQ::create([
             'user_id' => auth()->user()->id ,
             'QQ' => $mes , 
         ]);
         $dkpqq->save();
         return redirect()->back()
-        ->with('success', "成功导入QQ:".$mes);
+        ->with('success', "添加QQ成功:".$mes);}
+    }
+
+    public function editname(editname $request)
+    {
+        $mes = $request->input('editname');
+        $user = User::where("id",auth()->user()->id)->update(['name'=>$mes]);
+        return redirect()->back()
+        ->with('success', "更新昵称成功:".$mes);
     }
 
     public function getqqdkp($QQ = null)
