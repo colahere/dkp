@@ -697,7 +697,7 @@ class DkpController extends Controller
             $value = (float)$paptodkp->value;
             $Users = RefreshToken::find($paptodkp->character_id);
             $score = (string)$value*$papset;
-
+        if($Users){
         $dkpInfo = DkpInfo::create([
             'user_id' => $Users->user_id,
             'character_id' => $paptodkp->character_id,
@@ -707,7 +707,7 @@ class DkpController extends Controller
             'supplement_id' => '0',
         ]);
         $dkpInfo->save();
-        $i++;
+        $i++;}
         }
 
         return redirect()->back()
